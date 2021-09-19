@@ -19,12 +19,14 @@ module.exports = {
     ],
     deploy: {
         production: {
-            host: 'tadeoarmenta.com',
+            key  : 'C:\\Users\\tad30\\Downloads\\ubuntu-ec2.pem',
+            user: 'ubuntu',
+            host: 'vayyup.tadeoarmenta.com',
             ref: 'origin/master',
-            repo: "git@github.com:TadeoArmenta/Vayyup.git", // your repo url
-            path: "/home/ubuntu/Vayyup",
-            "post-deploy":
-                "npm install && pm2 reload ecosystem.config.js --env production && pm2 save"
+            repo: 'git@github.com:TadeoArmenta/Vayyup.git',
+            path: '/home/ubuntu/Vayyup',
+            'post-deploy':
+                "yarn && pm2 reload ecosystem.config.js --env production && pm2 save"
         }
     }
 };
