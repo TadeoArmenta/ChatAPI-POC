@@ -32,7 +32,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/AccountCreateData"
+                "$ref": "#/components/schemas/AccountSeedData"
               }
             }
           }
@@ -43,7 +43,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/AccountResponse"
+                  "$ref": "#/components/schemas/Account"
                 }
               }
             }
@@ -97,7 +97,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/AccountResponse"
+                  "$ref": "#/components/schemas/Account"
                 }
               }
             }
@@ -132,7 +132,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/AccountResponse"
+                  "$ref": "#/components/schemas/Account"
                 }
               }
             }
@@ -337,7 +337,7 @@
   },
   "components": {
     "schemas": {
-      "AccountCreateData": {
+      "AccountSeedData": {
         "type": "object",
         "required": [ "username","password" ],
         "properties": {
@@ -355,7 +355,7 @@
           "phone": "+34920071234"
         }
       },
-      "AccountResponse": {
+      "Account": {
         "type": "object",
         "properties": {
           "_id": { "type": "string" },
@@ -375,7 +375,7 @@
       "AccountArray": {
         "type": "array",
         "items": {
-          "$ref": "#/components/schemas/AccountResponse"
+          "$ref": "#/components/schemas/Account"
         }
       },
       "Metadata": {
@@ -415,13 +415,22 @@
       "Message": {
         "type": "object",
         "properties": {
-          "sentBy":{ "type": "string"},
-          "thread":{ "type": "string"},
-          "type":{ "type": "string"},
+          "sentBy":{
+            "type": "string",
+            "description": "Sender Account id, "
+          },
+          "thread":{
+            "type": "string",
+            "description": "MessageThread id string"
+          },
+          "type":{ "type": "string",
+            "enum": ["text","image","video"]
+          },
           "message":{ "type": "string"},
           "read":{
             "type": "array",
-            "items": { "type": "string"}
+            "items": { "type": "string"},
+            "description": "Array of Account ids that already seen the message"
           },
           "is_deleted": {
             "type": "array",
