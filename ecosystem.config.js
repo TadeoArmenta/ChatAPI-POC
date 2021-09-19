@@ -19,7 +19,6 @@ module.exports = {
     ],
     deploy: {
         production: {
-            key  : 'C:\\Users\\tad30\\Downloads\\ubuntu-ec2.pem',
             user: 'ubuntu',
             host: 'vayyup.tadeoarmenta.com',
             ref: 'origin/master',
