@@ -19,13 +19,18 @@ module.exports = {
     ],
     deploy: {
         production: {
+            key: '~/.ssh/id_rsa',
             user: 'ubuntu',
             host: 'vayyup.tadeoarmenta.com',
             ref: 'origin/master',
             repo: 'git@github.com:TadeoArmenta/Vayyup.git',
             path: '/home/ubuntu/Vayyup',
-            'post-deploy':
-                "yarn && pm2 reload ecosystem.config.js --env production && pm2 save"
+            /// Source the user's .zshrc file first!!
+            'post-deploy': `source ~/.bashrc && \
+             yarn install --ignore-engines && \
+             pm2 reload ecosystem.config.js --env production && \
+             pm2 save && \
+             sudo cp nginx-deploy.conf /etc/nginx/sites-available/vayyup.conf`
         }
     }
 };
