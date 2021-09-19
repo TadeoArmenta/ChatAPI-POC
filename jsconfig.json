@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es6",
+    "paths": {
+      "@modules": ["src/modules/*"],
+      "@src": ["src/*"],
+      "@database": ["src/database/*"],
+      "@utils": ["src/utils/*"]
+    }
+  },
+  "exclude": ["node_modules"]
+}

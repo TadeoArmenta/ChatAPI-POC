@@ -1,0 +1,17 @@
+{
+    "apps" : [
+        {
+            "name":               "VAYYUP:DEVICES:API",
+            "script":             "server.js",
+            "ignore_watch":       ["node_modules","logs"],
+            "exec_mode":          "cluster_mode",
+            "instances":          2,
+            "watch":              true,
+            "merge_logs":         true,
+            "env": {
+                "NODE_ENV":         "production",
+                "UV_THREADPOOL_SIZE":"10"
+            }
+        }
+    ]
+}

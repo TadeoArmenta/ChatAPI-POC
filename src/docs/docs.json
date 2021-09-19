@@ -1,0 +1,441 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Vayyup API",
+    "version": "1.0.0",
+    "description": "A simple firs step on API development"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:4040/api/v1",
+      "description": "Development server"
+    },
+    {
+      "url": "https://vayyup.tadeoarmenta.com/api/v1",
+      "description": "Deployment server"
+    }
+  ],
+  "tags": [
+    {
+      "name": "v1",
+      "description": "Vayyup Api v1"
+    }
+  ],
+  "paths": {
+    "/account": {
+      "put": {
+        "summary": "Create new Account",
+        "operationId": "createAccount",
+        "tags": ["v1"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AccountCreateData"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Account successfully created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccountResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "A conflict Occurred",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "Get Account list",
+        "operationId": "getAccountList",
+        "tags": [ "v1" ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved list",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccountArray"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/account/{id}": {
+      "get": {
+        "summary": "Get Account Info by Id",
+        "operationId": "getAccountById",
+        "tags": [ "v1" ],
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema":{ "type": "string" },
+          "description": "Account Id",
+          "example": "61474b5d4d09e2d2e1e2483d"
+        }],
+        "responses": {
+          "201": {
+            "description": "Account Info",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccountResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "A conflict Occurred",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "summary": "Update Account Info by Id",
+        "operationId": "updateAccountById",
+        "tags": [ "v1" ],
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema":{ "type": "string" },
+          "description": "Account Id",
+          "example": "61474b5d4d09e2d2e1e2483d"
+        }],
+        "responses": {
+          "202": {
+            "description": "Successfully Updated Account",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccountResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Remove Account by Id",
+        "operationId": "removeAccountByID",
+        "tags": [ "v1" ],
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema":{
+            "type": "string"
+          },
+          "description": "Account Id"
+        }],
+        "responses": {
+          "204": {
+            "description": "Successfully Deleted Account"
+          }
+        }
+      }
+    },
+    "/account/{id}/conversations":{
+      "get": {
+        "summary": "Get User Conversations",
+        "operationId": "getUserConversations",
+        "tags": [ "v1" ],
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema":{ "type": "string" },
+          "description": "Account Id",
+          "example": "61474b5d4d09e2d2e1e2483d"
+        }],
+        "responses": {
+          "200": {
+            "description": "Account Conversations",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MessageThreadArray"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "A conflict Occurred",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/conversations/{id}": {
+      "get": {
+        "summary": "Get Conversation info by Id",
+        "operationId": "getConversation",
+        "tags": [ "v1" ],
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema":{ "type": "string" },
+          "description": "Account Id",
+          "example": "61474b5d4d09e2d2e1e2483d"
+        }],
+        "responses": {
+          "200": {
+            "description": "Conversation Info",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MessageThread"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "A conflict Occurred",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Remove Thread by Id",
+        "operationId": "removeThreadByID",
+        "tags": [ "v1" ],
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema":{ "type": "string" },
+          "description": "Thread Id"
+        }],
+        "responses": {
+          "204": {
+            "description": "Successfully Deleted Thread"
+          }
+        }
+      }
+    },
+    "/conversations/{id}/{sinceMoment}": {
+      "get": {
+        "summary": "Get Messages Since Moment",
+        "operationId": "getConversationMessagesByTime",
+        "tags": [ "v1" ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema":{ "type": "string" },
+            "description": "Thread Id",
+            "example": "61474b5d4d09e2d2e1e2483d"
+          },
+          {
+            "name": "sinceMoment",
+            "in": "path",
+            "required": true,
+            "schema":{ "type": "string" },
+            "description": "Timestamp unix in Milliseconds",
+            "example": "1632077698000"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Messages Array",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MessageArray"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "A conflict Occurred",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/conversations/{id}/latest": {
+      "get": {
+        "summary": "Latest 100 Messages from conversation",
+        "operationId": "getLatestMessages",
+        "tags": [ "v1" ],
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema":{ "type": "string" },
+          "description": "Account Id",
+          "example": "61474b5d4d09e2d2e1e2483d"
+        }],
+        "responses": {
+          "200": {
+            "description": "Messages Array Info",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MessageArray"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "A conflict Occurred",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AccountCreateData": {
+        "type": "object",
+        "required": [ "username","password" ],
+        "properties": {
+          "username": { "type": "string" },
+          "fullName": { "type": "string" },
+          "email": { "type": "string" },
+          "phone": { "type": "string" },
+          "password": { "type": "string" }
+        }
+      },
+      "AccountResponse": {
+        "type": "object",
+        "properties": {
+          "_id": { "type": "string" },
+          "username": { "type": "string" },
+          "fullName": { "type": "string" },
+          "email": { "type": "string" },
+          "phone": { "type": "string" },
+          "type": { "type": "string" },
+          "socketSession": { "type": "string" },
+          "suspended": {"type": "boolean"},
+          "resetPasswordToken": { "type": "string" },
+          "createdAt": { "type": "string" },
+          "updatedAt": { "type": "string" },
+          "metadata": { "$ref": "#/components/schemas/Metadata" }
+        }
+      },
+      "AccountArray": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/AccountResponse"
+        }
+      },
+      "Metadata": {
+        "type": "object",
+        "properties": {
+          "_id": { "type": "string"},
+          "type": { "type": "string" },
+          "accountStatus": { "type": "string" },
+          "avatar":{ "type": "string" },
+          "tagline":  { "type": "string" },
+          "alias":  { "type": "string" },
+          "ip":  { "type": "string" },
+          "lastSeen": { "type": "string" }
+        }
+      },
+      "MessageThread": {
+        "type": "object",
+        "properties": {
+          "_id": { "type": "string" },
+          "owner": { "type": "string"},
+          "type":  { "type": "string"},
+          "participants": {
+            "type": "array",
+            "items": { "type": "string"}
+          },
+          "name": { "type": "string"},
+          "roomId":{ "type": "string"},
+          "metadata": { "$ref": "#/components/schemas/Metadata" }
+        }
+      },
+      "MessageThreadArray": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/MessageThread"
+        }
+      },
+      "Message": {
+        "type": "object",
+        "properties": {
+          "sentBy":{ "type": "string"},
+          "thread":{ "type": "string"},
+          "type":{ "type": "string"},
+          "message":{ "type": "string"},
+          "read":{
+            "type": "array",
+            "items": { "type": "string"}
+          },
+          "is_deleted": {
+            "type": "array",
+            "items": { "type": "string"}
+          }
+        }
+      },
+      "MessageArray": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/Message"
+        }
+      },
+      "Error": {
+        "type": "object",
+        "required": [ "name", "message" ],
+        "properties": {
+          "name": { "type": "string" },
+          "message": { "type": "string" }
+        }
+      }
+    }
+  }
+}
