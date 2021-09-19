@@ -346,6 +346,13 @@
           "email": { "type": "string" },
           "phone": { "type": "string" },
           "password": { "type": "string" }
+        },
+        "example": {
+          "username": "dat30",
+          "password": ".@password@.",
+          "fullName": "Tadeo Armenta",
+          "email": "contact@tadeoarmenta.com",
+          "phone": "+34920071234"
         }
       },
       "AccountResponse": {
